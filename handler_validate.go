@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 func handlerValidChirp(w http.ResponseWriter, r *http.Request) {
@@ -11,7 +12,7 @@ func handlerValidChirp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type rtnJsonShape struct {
-		Valid bool `json:"valid"`
+		CleanedBody string `json:"cleaned_body"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -29,16 +30,24 @@ func handlerValidChirp(w http.ResponseWriter, r *http.Request) {
 	}
 
 	respondWithJSON(w, http.StatusOK, rtnJsonShape{
-		Valid: true,
+		CleanedBody: cleanChirp(params.Body),
 	})
 }
 
-func cleanChirp(string) string {
-	// maybe this should be done with the whole json struct?
-	// split words
-	// lowercase words
-	// match words against list
-	// replace matched word with ****
-	// return string
-	return ""
+func cleanChirp(chirpBody string) string {
+	naughty := make(map[string]struct{})
+	naughty["kerfuffle"] = struct{}{}
+	naughty["sharbert"] = struct{}{}
+	naughty["fornax"] = struct{}{}
+
+	words := strings.Split(chirpBody, " ")
+
+	for i, word := range words {
+		if _, ok := naughty[strings.ToLower(word)]; ok {
+			words[i] = "****"
+		}
+	}
+	cleanChirpBody := strings.Join(words, " ")
+
+	return cleanChirpBody
 }
