@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -20,7 +21,6 @@ func (cfg *apiConfig) handlerLogin(w http.ResponseWriter, r *http.Request) {
 		User
 		Token        string `json:"token"`
 		RefreshToken string `json:"refresh_token"`
-		IsRed        bool   `json:"is_chirpy_red"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -78,7 +78,7 @@ func (cfg *apiConfig) handlerIsRed(w http.ResponseWriter, r *http.Request) {
 		Event string `json:"event"`
 		Data  struct {
 			UserID uuid.UUID `json:"user_id"`
-		} `json:"data"`
+		}
 	}
 
 	decoder := json.NewDecoder(r.Body)
