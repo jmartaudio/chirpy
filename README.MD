@@ -58,7 +58,6 @@ Must sep platform="dev" in .env and requires no input
 ```
 Changing email requires a token. Requests should be sent with json shape above  
 
-### POST
 /api/polka/webhooks -- Webhook for fictitious payment provider to upgrade account to premium "Red" account  
 Requires an api from the fake payment platform Polka  
 
