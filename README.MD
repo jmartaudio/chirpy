@@ -47,6 +47,8 @@ Refresh and revoke require a token and take no input
 /admin/reset -- Resets the db for development.  
 Must sep platform="dev" in .env and requires no input  
 
+/api/polka/webhooks -- Webhook for fictitious payment provider to upgrade account to premium "Red" account  
+Requires an api from the fake payment platform Polka
 
 ### PUT
 /api/users -- Change email and or password  
@@ -56,10 +58,7 @@ Must sep platform="dev" in .env and requires no input
   "password": "123456"
 }
 ```
-Changing email requires a token. Requests should be sent with json shape above  
-
-/api/polka/webhooks -- Webhook for fictitious payment provider to upgrade account to premium "Red" account  
-Requires an api from the fake payment platform Polka  
+Changing email requires a token. Requests should be sent with json shape above    
 
 ### DELETE
 /api/chirps/{chirpID} Delete regretful chirp  
